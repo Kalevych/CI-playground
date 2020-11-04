@@ -18,6 +18,9 @@ jobs:
     steps:
       - checkout
       - run:
+         name: Bundle Install
+         command: bundle check || bundle install
+      - run:
          name: unit tests
          command: bundle exec fastlane test
 

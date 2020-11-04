@@ -5,7 +5,6 @@ orbs:
 
 jobs:
    build:
-    executor: android/android
       steps:
       - checkout
       - run:
@@ -14,7 +13,6 @@ jobs:
       - run:
          command: bundle exec fastlane assemble_build
    test:
-    executor: android/android
      steps:
       - checkout
       - run:

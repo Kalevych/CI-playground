@@ -26,7 +26,7 @@ jobs:
          name: unit tests
          command: bundle exec fastlane test
    test_instrumentation:
-     <<: *android_config
+    executor: android/android
      steps:
        - checkout
        - *restore_gradle_cache

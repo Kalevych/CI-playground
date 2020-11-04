@@ -99,7 +99,7 @@ jobs:
 
 
    test:
-    executor: android/android
+     <<: *android_config
     steps:
       - checkout
       - run:

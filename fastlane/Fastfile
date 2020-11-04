@@ -56,7 +56,7 @@ platform :android do
   desc "Run instrumentation tests in Firebase Test Lab"
   lane :instrumentation_tests_testlab do
     run_tests_firebase_testlab(
-      project_id: "com.afkoders.roomsample",
+      project_id: "roomsample-51434",
       devices: [
         {
           model: "Nexus6P",

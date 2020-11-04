@@ -50,4 +50,6 @@ workflows:
     jobs:
       - build
       - test
-      - test_instrumentation
+      - test_instrumentation:
+         requires:
+            - build_debug

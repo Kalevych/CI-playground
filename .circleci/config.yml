@@ -29,6 +29,9 @@ jobs:
      executor: android/android
      steps:
        - checkout
+         - run:
+          name: Bundle Install
+          command: bundle check || bundle install
        - run:
            name: Uninstall crcmod
            command: echo "y" | sudo pip uninstall crcmod

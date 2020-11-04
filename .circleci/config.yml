@@ -9,6 +9,12 @@ jobs:
 
    steps:
      - checkout
+     - *restore_gradle_cache
+     - *restore_gems_cache
+     - *android_dependencies
+     - *ruby_dependencies
+     - *save_gradle_cache
+     - *save_gems_cache
      - run:
          command: bundle exec fastlane assemble_build
      - run:

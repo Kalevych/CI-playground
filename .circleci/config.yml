@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   android: circleci/android@0.2.0
-  
+
 references:
 
 ## Workspace
@@ -141,4 +141,4 @@ workflows:
       - build_debug
       - test
       - test_instrumented:
-         require: build_debug          
+         requires: build_debug          

@@ -4,17 +4,20 @@ orbs:
  android: circleci/android@0.2.0
 
 jobs:
- build:
+   build:
+    executor: android/android
+      steps:
+      - checkout
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          command: bundle exec fastlane assemble_build
+ tests:
    executor: android/android
-
    steps:
      - checkout
      - run:
-         name: Bundle Install
-         command: bundle check || bundle install
-     - run:
-         command: bundle exec fastlane assemble_build
-     - run:
         name: unit tests
-        command: bundle exec fastlane tests
+        command: bundle exec fastlane test
       

@@ -14,5 +14,4 @@ jobs:
      - run:
         name: unit tests
         command: bundle exec fastlane tests
-
-    -
+      

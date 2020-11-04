@@ -14,8 +14,14 @@ jobs:
       - run:
          command: bundle exec fastlane assemble_build
    test:
+    steps:
      - checkout
      - run:
         name: unit tests
         command: bundle exec fastlane test
-      
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test

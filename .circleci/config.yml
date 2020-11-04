@@ -9,12 +9,9 @@ jobs:
 
    steps:
      - checkout
-     - *restore_gradle_cache
-     - *restore_gems_cache
-     - *android_dependencies
-     - *ruby_dependencies
-     - *save_gradle_cache
-     - *save_gems_cache
+     - run:
+         name: Bundle Install
+         command: bundle check || bundle install
      - run:
          command: bundle exec fastlane assemble_build
      - run:

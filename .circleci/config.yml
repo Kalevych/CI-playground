@@ -136,7 +136,7 @@ jobs:
           destination: /firebase/
 
 workflows:
-  build_and_test:
+  workflow:
     jobs:
       - build_debug
       - test

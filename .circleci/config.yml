@@ -136,9 +136,10 @@ jobs:
           destination: /firebase/
 
 workflows:
+  version: 2
   workflow:
     jobs:
-      - build_debug
-      - test
+      - build_debug  
       - test_instrumented:
-         requires: build_debug          
+          requires:
+            - build_debug

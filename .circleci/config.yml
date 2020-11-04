@@ -5,7 +5,8 @@ orbs:
 
 jobs:
    build:
-      steps:
+    executor: android/android
+    steps:
       - checkout
       - run:
           name: Bundle Install
@@ -13,7 +14,8 @@ jobs:
       - run:
          command: bundle exec fastlane assemble_build
    test:
-     steps:
+    executor: android/android
+    steps:
       - checkout
       - run:
          name: unit tests

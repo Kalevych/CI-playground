@@ -21,8 +21,8 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "Assemble Build"
-  lane :assempble_build do |options|
+  desc "assemble_build"
+  lane :assemble_build do |options|
     gradle(task: "assemble",
     flavor: options[:build_flavor],
     build_type: options[:build_type])

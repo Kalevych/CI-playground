@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "212516517495",
+    "firebase_url": "https://roomsample-51434.firebaseio.com",
+    "project_id": "roomsample-51434",
+    "storage_bucket": "roomsample-51434.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212516517495:android:f12fdd09ea9828982a3872",
+        "android_client_info": {
+          "package_name": "com.afkoders.roomsample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212516517495-b6sbolge5tc1o05ie290scj61hhq03op.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBr6T0Ku2O6nQudbYXJq06_tsvWyRXzCh4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212516517495-b6sbolge5tc1o05ie290scj61hhq03op.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

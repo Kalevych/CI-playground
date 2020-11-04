@@ -14,7 +14,7 @@ jobs:
       - run:
          command: bundle exec fastlane assemble_build
       - store_artifacts:
-         path: app/build/outputs/apk/dev/debug
+         path: app/build/outputs/apk/debug
    test:
     executor: android/android
     steps:

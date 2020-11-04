@@ -29,12 +29,12 @@ jobs:
      executor: android/android
      steps:
        - checkout
-       - *restore_gradle_cache
-       - *restore_gems_cache
-       - *ruby_dependencies
-       - *android_dependencies
-       - *save_gradle_cache
-       - *save_gems_cache
+       - restore_gradle_cache
+       - restore_gems_cache
+       - ruby_dependencies
+       - android_dependencies
+       - save_gradle_cache
+       - save_gems_cache
        - run:
            name: Uninstall crcmod
            command: echo "y" | sudo pip uninstall crcmod

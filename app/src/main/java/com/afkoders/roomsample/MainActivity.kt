@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         adapter = WordsAdapter(this)
 
+
         rvWords.adapter = adapter
 
         wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)

@@ -21,9 +21,11 @@ platform :android do
     gradle(task: "test")
   end
 
-  desc "Build"
-  lane :build do
-    gradle(task: "clean assembleRelease")
+  desc "Assemble Build"
+  lane :assempble_build do |options|
+    gradle(task: "assemble",
+    flavor: options[:build_flavor],
+    build_type: options[:build_type])
   end
 
   desc "Submit a new Beta Build to Crashlytics Beta"

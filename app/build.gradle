@@ -25,6 +25,19 @@ android {
         }
     }
 
+    productFlavors {
+        dev {
+            applicationId 'com.afkoders.roomsample.dev'
+            buildConfigField("String", "APP_MODE", "\"Dev\"")
+        }
+        beta {
+            buildConfigField("String", "APP_MODE", "\"Beta\"")
+        }
+        prod {
+            buildConfigField("String", "APP_MODE", "\"Prod\"")
+        }
+    }
+
     packagingOptions {
         exclude 'META-INF/atomicfu.kotlin_module'
     }

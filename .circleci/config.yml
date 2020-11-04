@@ -13,6 +13,8 @@ jobs:
           command: bundle check || bundle install
       - run:
          command: bundle exec fastlane assemble_build
+      - store_artifacts:
+         path: app/build/outputs/
    test:
     executor: android/android
     steps:

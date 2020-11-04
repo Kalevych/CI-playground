@@ -52,4 +52,4 @@ workflows:
       - test
       - test_instrumentation:
          requires:
-            - build_debug
+            - build

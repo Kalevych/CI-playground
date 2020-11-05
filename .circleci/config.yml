@@ -1,58 +1,57 @@
-version: 2.1
+version: 2
 
-orbs:
- android: circleci/android@0.2.0
+defaults: &defaults
+  docker:
+    - image: circleci/android:api-28-alpha
+  environment:
+    JVM_OPTS: -Xmx3200m
 
 jobs:
-   build:
-    executor: android/android
+  unit-tests:
+    <<: *defaults
     steps:
       - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Bundle Install
-          command: bundle check || bundle install
+          name: Install fastlane
+          command: bundle install
       - run:
-         command: bundle exec fastlane assemble_build
+          name: Run the unit tests
+          command: bundle exec fastlane unit_tests
       - store_artifacts:
-         path: app/build/outputs/apk/debug
-
-   test:
-    executor: android/android
+          path: app/build/reports
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }} 
+  
+  instrumentation-tests:
+    <<: *defaults
     steps:
       - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-         name: Bundle Install
-         command: bundle check || bundle install
+          name: Install fastlane
+          command: bundle install
       - run:
-         name: unit tests
-         command: bundle exec fastlane test
-
-   test_instrumentation:
-     executor: android/android
-     steps:
-       - checkout
-       - run:
-          name: Bundle Install
-          command: bundle check || bundle install
-       - run:
-           name: Uninstall crcmod
-           command: echo "y" | sudo pip uninstall crcmod
-       - run:
-           name: Install crcmod
-           command: sudo pip install -U crcmod
-       - run:
-           name: Run instrumentation tests in Firebase Test Lab
-           command: bundle exec fastlane instrumentation_tests_testlab
-       - store_artifacts:
-           path: firebase/
-           destination: /firebase/
+          name: Store service account
+          command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
+      - run: 
+          name: Authorize to gcloud
+          command: gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json --project=${GOOGLE_PROJECT_ID}
+      - run:
+          name: Run the instrumentation tests in Firebase test lab
+          command: bundle exec fastlane instrumentation_tests
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }} 
 
 workflows:
   version: 2
   workflow:
     jobs:
-      - build
-      - test
-      - test_instrumentation:
-          requires:
-            - build
+      - unit-tests
+      - instrumentation-tests

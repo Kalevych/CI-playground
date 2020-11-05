@@ -22,19 +22,8 @@ platform :android do
   end
 
   desc "assemble_build"
-  lane :assemble_build do |options|
-    gradle(task: "assemble",
-    flavor: options[:build_flavor],
-    build_type: options[:build_type])
-  end
-
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-  
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
+  lane :assemble_build do
+    gradle(task: "assembleDebug")
   end
 
   desc "Deploy a new version to the Google Play"
@@ -68,13 +57,14 @@ platform :android do
 
   desc "Assemble Test Application"
   lane :assemble_test_application do 
-    gradle(task: "assembleDevDebugAndroidTest")
+    gradle(task: "assembleDebugAndroidTest")
   end
 
   desc "Assemble Build and Test Application"
-  lane :assemble do 
+  lane :assemble_with_instrument_tests do 
     assemble_build
     assemble_test_application
+    sh("../ci/run_firebase_tests.sh")
   end
 
 end

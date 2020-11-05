@@ -31,6 +31,7 @@ platform :android do
   desc "assemble_build"
   lane :assemble_build do
     gradle(task: "assembleDebug")
+    telegramMessage("build successful")
   end
 
   error do |lane, exception|
@@ -41,30 +42,6 @@ platform :android do
   lane :deploy do
     gradle(task: "clean assembleRelease")
     upload_to_play_store
-  end
-
-  desc "Run instrumentation tests"
-  lane :instrumentation_tests do
-    automated_test_emulator_run(
-      AVD_setup_path: "fastlane/AVD_setup.json",
-      AVD_recreate_new: false,
-      AVD_clean_after: false,
-      gradle_task: "connectedDebugAndroidTest")
-      telegramMessage("fine instrumentation passed")
-  end 
-
-
-  desc "Run instrumentation tests in Firebase Test Lab"
-  lane :instrumentation_tests_testlab do
-    run_tests_firebase_testlab(
-      project_id: "roomsample-51434",
-      devices: [
-        {
-          model: "Nexus6P",
-          version: "27"
-        }
-      ],
-      delete_firebase_files: true)
   end
 
   desc "Assemble Test Application"

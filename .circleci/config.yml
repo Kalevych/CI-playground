@@ -15,20 +15,19 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+          name: Install fastlane
+          command: bundle install
       - store_artifacts:
           path: app/build/reports
           destination: reports
       - store_test_results:
           path: app/build/test-results
       - run:
+          name: "Setting telegram credentials"
+          command: bundle exec fastlane set_telegram_creds token:$TELEGRAM_TOKEN chat_id:$TELEGRAM_CHAT_ID
+      - run:
           name: Run Build
-          command: ./gradlew build
+          command: bundle exec fastlane assemble_build
       - store_artifacts:
           path: app/build/outputs/apk/debug/
           destination: artifact-file

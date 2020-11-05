@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
         adapter = WordsAdapter(this)
 
-
         rvWords.adapter = adapter
 
         wordViewModel = ViewModelProvider(this).get(WordViewModel::class.java)
@@ -31,7 +30,6 @@ class MainActivity : AppCompatActivity() {
             // Update the cached copy of the words in the adapter.
             words?.let { adapter.setWords(it) }
         })
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

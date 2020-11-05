@@ -16,14 +16,25 @@
 default_platform(:android)
 
 platform :android do
-  desc "Runs all the tests"
+  
+ desc "Runs all the tests"
   lane :test do
     gradle(task: "test")
+  end
+
+ desc "Initialize telegram credentials"
+  lane :set_telegram_creds do |options|
+    ENV["TELEGRAM_TOKEN"] = options[:token]
+    ENV["TELEGRAM_CHAT_ID"] = options[:chat_id]
   end
 
   desc "assemble_build"
   lane :assemble_build do
     gradle(task: "assembleDebug")
+  end
+
+  error do |lane, exception|
+    telegramMessage("build failed")
   end
 
   desc "Deploy a new version to the Google Play"
@@ -39,6 +50,7 @@ platform :android do
       AVD_recreate_new: false,
       AVD_clean_after: false,
       gradle_task: "connectedDebugAndroidTest")
+      telegramMessage("fine instrumentation passed")
   end 
 
 
@@ -66,5 +78,15 @@ platform :android do
     assemble_test_application
     sh("../run_firebase_tests.sh")
   end
+
+
+  def telegramMessage(message)
+    require 'net/http'
+
+    uri = URI.parse("https://api.telegram.org/bot#{ENV["TELEGRAM_TOKEN"]}/sendMessage")
+    response = Net::HTTP.post_form(uri, {:chat_id => ENV["TELEGRAM_CHAT_ID"], :text => message, :parse_mode => "HTML"})
+  end
+
+
 
 end

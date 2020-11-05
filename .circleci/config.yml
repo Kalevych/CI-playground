@@ -43,7 +43,10 @@ jobs:
           command: gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json --project=${GOOGLE_PROJECT_ID}
       - run:
           name: Chmod permissions 
-          command: sudo chmod +x "../ci/run_firebase_tests.sh"
+          command: sudo chmod +x "../run_firebase_tests.sh"
+      - run:
+          name: Chmod permissions 
+          command: sudo chmod +x "run_firebase_tests.sh"
       - run:
           name: Run the instrumentation tests in Firebase test lab
           command: bundle exec fastlane assemble_with_instrument_tests

@@ -64,7 +64,7 @@ platform :android do
   lane :assemble_with_instrument_tests do 
     assemble_build
     assemble_test_application
-    sh("../ci/run_firebase_tests.sh")
+    sh("../run_firebase_tests.sh")
   end
 
 end

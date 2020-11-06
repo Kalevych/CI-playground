@@ -54,7 +54,7 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }} 
 
-    firebase-send:
+  firebase-send:
     <<: *defaults
     steps:
       - checkout

@@ -28,6 +28,11 @@ platform :android do
     ENV["TELEGRAM_CHAT_ID"] = options[:chat_id]
   end
 
+ desc "Initialize firebase distribution credentials"
+  lane :set_firebase_creds do |options|
+    ENV["FIREBASE_TOKEN"] = options[:token]
+  end
+
   desc "assemble_build"
   lane :assemble_build do
     gradle(task: "assembleDebug")
@@ -55,6 +60,19 @@ platform :android do
     assemble_test_application
     sh("../run_firebase_tests.sh")
   end
+
+  desc "My awesome app"
+  lane :distribute_firebase do
+      build_android_app(...) # build_android_app is a built-in fastlane action.
+
+      firebase_app_distribution(
+          app: "roomsample-51434",
+          firebase_cli_token: ENV["FIREBASE_TOKEN"]
+          testers: "oleksandr.kalevych@gmail.com, oleksandr.kalevych@uptech.team",
+          release_notes: "Lots of amazing new features to test out!"
+      )
+
+    end
 
 
   def telegramMessage(message)

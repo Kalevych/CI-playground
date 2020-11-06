@@ -63,7 +63,6 @@ platform :android do
 
   desc "My awesome app"
   lane :distribute_firebase do
-      build_android_app(...) # build_android_app is a built-in fastlane action.
 
       firebase_app_distribution(
           app: "roomsample-51434",

@@ -26,9 +26,6 @@ jobs:
           name: "Setting telegram credentials"
           command: bundle exec fastlane set_telegram_creds token:$TELEGRAM_TOKEN chat_id:$TELEGRAM_CHAT_ID
       - run:
-          name: "Setting firebase credentials"
-          command: bundle exec fastlane set_firebase_creds token:$FIREBASE_TOKEN
-      - run:
           name: Run Build
           command: bundle exec fastlane assemble_build
       - store_artifacts:
@@ -64,8 +61,11 @@ jobs:
           name: Install fastlane
           command: bundle install
       - run:
+          name: "Install Firebase CLI"
+          command: curl -sL firebase.tools | bash
+      - run:
           name: Run the firebase distribution
-          command: bundle exec fastlane distribute_firebase
+          command: bundle exec fastlane distribute_firebase token:$FIREBASE_TOKEN
       - save_cache:
           paths:
             - ~/.gradle

@@ -28,11 +28,6 @@ platform :android do
     ENV["TELEGRAM_CHAT_ID"] = options[:chat_id]
   end
 
- desc "Initialize firebase distribution credentials"
-  lane :set_firebase_creds do |options|
-    ENV["FIREBASE_TOKEN"] = options[:token]
-  end
-
   desc "assemble_build"
   lane :assemble_build do
     gradle(task: "assembleDebug")
@@ -62,11 +57,12 @@ platform :android do
   end
 
   desc "My awesome app"
-  lane :distribute_firebase do
+  lane :distribute_firebase do |options|
 
       firebase_app_distribution(
           app: "roomsample-51434",
-          firebase_cli_token: ENV["FIREBASE_TOKEN"]
+          firebase_cli_token: "#{options[:firebase_token]}"
+          apk_path: "app/build/outputs/apk/debug/app-debug.apk",
           testers: "oleksandr.kalevych@gmail.com, oleksandr.kalevych@uptech.team",
           release_notes: "Lots of amazing new features to test out!"
       )
@@ -80,7 +76,5 @@ platform :android do
     uri = URI.parse("https://api.telegram.org/bot#{ENV["TELEGRAM_TOKEN"]}/sendMessage")
     response = Net::HTTP.post_form(uri, {:chat_id => ENV["TELEGRAM_CHAT_ID"], :text => message, :parse_mode => "HTML"})
   end
-
-
 
 end

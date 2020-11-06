@@ -61,6 +61,9 @@ jobs:
           name: "Install Firebase CLI"
           command: curl -sL firebase.tools | bash
       - run:
+          name: Run Build
+          command: bundle exec fastlane assemble_build
+      - run:
           name: Run the firebase distribution
           command: bundle exec fastlane distribute_firebase token:$FIREBASE_TOKEN
       - save_cache:

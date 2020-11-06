@@ -28,10 +28,7 @@ jobs:
       - run:
           name: Run Build
           command: bundle exec fastlane assemble_build
-      - store_artifacts:
-          path: app/build/outputs/apk/debug/
-          destination: artifact-file
-
+    
   unit-tests:
     <<: *defaults
     steps:

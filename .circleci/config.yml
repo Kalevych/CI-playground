@@ -16,7 +16,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Install fastlane
-          command: bundle install
+          command: bundle install -v 2.160.0
       - store_artifacts:
           path: app/build/reports
           destination: reports
@@ -37,7 +37,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Install fastlane
-          command: bundle install
+          command: bundle install -v 2.160.0
       - run:
           name: Run the unit tests
           command: bundle exec fastlane test
@@ -56,7 +56,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Install fastlane
-          command: bundle install
+          command: bundle install -v 2.160.0
       - run:
           name: "Install Firebase CLI"
           command: curl -sL firebase.tools | bash
@@ -79,7 +79,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Install fastlane
-          command: bundle install
+          command: bundle install -v 2.160.0
       - run:
           name: Store service account
           command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json

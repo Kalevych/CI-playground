@@ -19,8 +19,8 @@ jobs:
           command: bundle remove fastlane
       - run:
           name: Install fastlane
-          command: bundle add fastlane --version 2.160.0
-       - run:
+          command: bundle add fastlane --version "2.160.0"
+      - run:
           name: Install bundle
           command: bundle install
       - store_artifacts:

@@ -63,7 +63,10 @@ platform :android do
       firebase_app_distribution(
           app: "1:212516517495:android:f12fdd09ea9828982a3872",
           firebase_cli_token: "#{options[:token]}",
-          apk_path: "app/build/outputs/apk/debug/app-debug.apk"
+          apk_path: "app/build/outputs/apk/debug/app-debug.apk",
+          testers: "oleksandr.kalevych@gmail.com, oleksandr.kalevych@uptech.team",
+          groups: "qa-goup",
+          release_notes: "finally"
       )
 
     end

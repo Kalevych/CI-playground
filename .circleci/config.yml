@@ -16,6 +16,9 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Install fastlane
+          command: sudo gem install fastlane -v 2.160.0
+      - run:
+          name: Install bundle
           command: bundle install
       - store_artifacts:
           path: app/build/reports
@@ -56,6 +59,9 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Install fastlane
+          command: sudo gem install fastlane -v 2.160.0
+      - run:
+          name: Install bundle
           command: bundle install
       - run:
           name: "Install Firebase CLI"

@@ -16,7 +16,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Install fastlane
-          command: sudo gem install fastlane -v 2.160.0
+          command: bundle add fastlane --version 2.160.0
       - run:
           name: Install bundle
           command: bundle install
@@ -59,7 +59,7 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
           name: Install fastlane
-          command: sudo gem install fastlane -v 2.160.0
+          command: bundle add fastlane --version 2.160.0
       - run:
           name: Install bundle
           command: bundle install

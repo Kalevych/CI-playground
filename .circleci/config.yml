@@ -15,14 +15,8 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: uninstall fastlane
-          command: bundle remove fastlane
-      - run:
-          name: Install fastlane
-          command: bundle add fastlane --version "2.160.0"
-      - run:
           name: Install bundle
-          command: bundle install
+          command: gem install bundler && bundle install && bundle update fastlane
       - store_artifacts:
           path: app/build/reports
           destination: reports

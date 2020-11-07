@@ -69,7 +69,6 @@ platform :android do
 
     end
 
-
   def telegramMessage(message)
     require 'net/http'
 
